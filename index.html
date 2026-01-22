@@ -1,0 +1,1210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mudasir's Cube Store - Premium Rubik's Cubes Pakistan</title>
+    <meta name="description" content="Premium Rubik's Cubes Store in Pakistan. Fast delivery, best prices, original products. Order now!">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #0a0a0a;
+            color: #e0e0e0;
+            line-height: 1.6;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            border-bottom: 2px solid rgba(0,212,255,0.3);
+            padding: 1.5rem;
+            position: sticky;
+            top: 0;
+            z-index: 40;
+            backdrop-filter: blur(10px);
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, #00d4ff, #ff00ea);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .cart-btn {
+            position: relative;
+            background: linear-gradient(135deg, #ff00ea, #bd00ff);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 2rem;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .cart-badge {
+            position: absolute;
+            top: -0.5rem;
+            right: -0.5rem;
+            background: #ef4444;
+            width: 1.5rem;
+            height: 1.5rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: bold;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .nav-btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .nav-btn.active {
+            background: linear-gradient(135deg, #00d4ff, #0099cc);
+            color: white;
+            box-shadow: 0 5px 15px rgba(0,212,255,0.5);
+        }
+
+        .nav-btn:not(.active) {
+            background: rgba(255,255,255,0.1);
+            color: #999;
+        }
+
+        .logout-btn {
+            background: rgba(239,68,68,0.2);
+            color: #f87171;
+            border: 1px solid rgba(239,68,68,0.5);
+        }
+
+        /* Main Content */
+        .main-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, #00d4ff, #ff00ea);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 2rem;
+        }
+
+        /* Products Grid */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .product-card {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            border-radius: 1rem;
+            overflow: hidden;
+            border: 1px solid rgba(15,52,96,0.5);
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            border-color: #00d4ff;
+            box-shadow: 0 15px 40px rgba(0,212,255,0.4);
+        }
+
+        .product-image {
+            position: relative;
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .stock-badge {
+            position: absolute;
+            top: 0.75rem;
+            right: 0.75rem;
+            background: #ff00ea;
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.75rem;
+            font-weight: bold;
+            z-index: 10;
+        }
+
+        .product-info {
+            padding: 1.5rem;
+        }
+
+        .category-tag {
+            background: rgba(0,212,255,0.1);
+            color: #00d4ff;
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.75rem;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 0.75rem;
+        }
+
+        .product-name {
+            font-size: 1.25rem;
+            font-weight: bold;
+            color: white;
+            margin-bottom: 0.5rem;
+        }
+
+        .product-desc {
+            color: #999;
+            font-size: 0.875rem;
+            margin-bottom: 1rem;
+        }
+
+        .product-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .product-price {
+            font-size: 1.75rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, #ff00ea, #00d4ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .add-to-cart-btn {
+            background: linear-gradient(135deg, #00d4ff, #0099cc);
+            color: white;
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .add-to-cart-btn:hover {
+            box-shadow: 0 5px 20px rgba(0,212,255,0.5);
+        }
+
+        .add-to-cart-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* Modal */
+        .modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.8);
+            backdrop-filter: blur(5px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 50;
+            padding: 1rem;
+        }
+
+        .modal-content {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            border-radius: 1rem;
+            padding: 2rem;
+            max-width: 800px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            border: 1px solid rgba(0,212,255,0.3);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-title {
+            font-size: 1.75rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, #00d4ff, #ff00ea);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            color: #999;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .cart-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            background: rgba(255,255,255,0.05);
+            border-radius: 0.5rem;
+            border: 1px solid #333;
+            margin-bottom: 1rem;
+        }
+
+        .cart-item img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 0.5rem;
+        }
+
+        .cart-item-info {
+            flex: 1;
+        }
+
+        .quantity-controls {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            background: #333;
+            border-radius: 2rem;
+            padding: 0.5rem;
+        }
+
+        .qty-btn {
+            background: #555;
+            border: none;
+            width: 2rem;
+            height: 2rem;
+            border-radius: 50%;
+            color: white;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .qty-btn.plus {
+            background: #00d4ff;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 0.75rem;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid #333;
+            border-radius: 0.5rem;
+            color: #fff;
+            font-size: 1rem;
+        }
+
+        .form-input:focus {
+            border-color: #00d4ff;
+            outline: none;
+        }
+
+        .btn-primary {
+            width: 100%;
+            background: linear-gradient(135deg, #ff00ea, #bd00ff);
+            color: white;
+            padding: 1rem;
+            border: none;
+            border-radius: 0.5rem;
+            font-weight: bold;
+            font-size: 1.125rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-primary:hover {
+            box-shadow: 0 10px 30px rgba(255,0,234,0.5);
+        }
+
+        /* Stats Cards */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #00d4ff, #0099cc);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card.orders {
+            background: linear-gradient(135deg, #ff00ea, #bd00ff);
+        }
+
+        .stat-card.revenue {
+            background: linear-gradient(135deg, #10b981, #059669);
+        }
+
+        .stat-card.customers {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: white;
+        }
+
+        .stat-label {
+            color: rgba(255,255,255,0.8);
+            font-weight: 500;
+        }
+
+        /* Admin Panel */
+        .admin-section {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(15,52,96,0.5);
+        }
+
+        .admin-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .add-product-btn {
+            background: linear-gradient(135deg, #00d4ff, #0099cc);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 2rem;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .product-list-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            background: rgba(255,255,255,0.05);
+            border-radius: 0.75rem;
+            border: 1px solid #333;
+            margin-bottom: 1rem;
+        }
+
+        .action-btns {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .btn-edit {
+            padding: 0.5rem;
+            background: rgba(59,130,246,0.2);
+            border: none;
+            border-radius: 0.5rem;
+            color: #60a5fa;
+            cursor: pointer;
+        }
+
+        .btn-delete {
+            padding: 0.5rem;
+            background: rgba(239,68,68,0.2);
+            border: none;
+            border-radius: 0.5rem;
+            color: #f87171;
+            cursor: pointer;
+        }
+
+        .notification {
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            padding: 1rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: bold;
+            z-index: 100;
+            animation: slideIn 0.3s ease;
+        }
+
+        .notification.success {
+            background: rgba(34,197,94,0.9);
+            color: white;
+        }
+
+        .notification.error {
+            background: rgba(239,68,68,0.9);
+            color: white;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .footer {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            border-top: 2px solid rgba(0,212,255,0.3);
+            padding: 3rem 2rem;
+            text-align: center;
+            margin-top: 4rem;
+        }
+
+        .footer-title {
+            font-size: 2rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, #00d4ff, #ff00ea);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+        }
+
+        .footer-info {
+            color: #999;
+            margin: 0.5rem 0;
+        }
+
+        @media (max-width: 768px) {
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Notification Container -->
+    <div id="notification-container"></div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="header-top">
+                <div class="logo">🎲 Mudasir's Cube Store</div>
+                <button id="cartBtn" class="cart-btn hidden">
+                    🛒 Cart (<span id="cartCount">0</span>)
+                    <span class="cart-badge" id="cartBadge">0</span>
+                </button>
+            </div>
+            <div class="nav-buttons">
+                <button class="nav-btn active" id="customerViewBtn">🛍️ Customer View</button>
+                <button class="nav-btn" id="adminViewBtn">⚙️ Admin Panel</button>
+                <button class="nav-btn logout-btn hidden" id="logoutBtn">🚪 Logout</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Customer View -->
+        <div id="customerView">
+            <h2 class="section-title">✨ Featured Products</h2>
+            <div class="products-grid" id="productsGrid"></div>
+        </div>
+
+        <!-- Admin View -->
+        <div id="adminView" class="hidden">
+            <!-- Stats -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <p class="stat-label">Total Products</p>
+                    <div class="stat-number" id="totalProducts">0</div>
+                </div>
+                <div class="stat-card orders">
+                    <p class="stat-label">Total Orders</p>
+                    <div class="stat-number" id="totalOrders">0</div>
+                </div>
+                <div class="stat-card revenue">
+                    <p class="stat-label">Total Revenue</p>
+                    <div class="stat-number">Rs. <span id="totalRevenue">0</span></div>
+                </div>
+                <div class="stat-card customers">
+                    <p class="stat-label">Customers</p>
+                    <div class="stat-number" id="totalCustomers">0</div>
+                </div>
+            </div>
+
+            <!-- Products Management -->
+            <div class="admin-section">
+                <div class="admin-header">
+                    <h2 class="section-title">📦 Manage Products</h2>
+                    <button class="add-product-btn" id="addProductBtn">➕ Add Product</button>
+                </div>
+                <div id="productsList"></div>
+            </div>
+
+            <!-- Orders Management -->
+            <div class="admin-section">
+                <h2 class="section-title">📋 Orders Management</h2>
+                <div id="ordersList"></div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Cart Modal -->
+    <div id="cartModal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">🛒 Your Cart</h2>
+                <button class="close-btn" onclick="closeCart()">✖</button>
+            </div>
+            <div id="cartItems"></div>
+            <div id="checkoutSection" class="hidden">
+                <div style="border-top: 1px solid #333; padding-top: 1.5rem; margin-bottom: 1.5rem;">
+                    <div style="display: flex; justify-content: space-between; font-size: 1.5rem; font-weight: bold; margin-bottom: 1.5rem;">
+                        <span>Total:</span>
+                        <span style="background: linear-gradient(135deg, #ff00ea, #00d4ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+                            Rs. <span id="cartTotal">0</span>
+                        </span>
+                    </div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+                        <input type="text" class="form-input" id="customerName" placeholder="Full Name *">
+                        <input type="text" class="form-input" id="customerPhone" placeholder="Phone Number *">
+                        <input type="text" class="form-input" id="customerAddress" placeholder="Delivery Address *">
+                        <input type="text" class="form-input" id="customerCity" placeholder="City *">
+                    </div>
+                    <button class="btn-primary" onclick="placeOrder()">💳 Place Order (Cash on Delivery)</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal hidden">
+        <div class="modal-content" style="max-width: 400px;">
+            <div class="modal-header">
+                <h2 class="modal-title">🔐 Admin Login</h2>
+                <button class="close-btn" onclick="closeLogin()">✖</button>
+            </div>
+            <div>
+                <p style="color: #999; margin-bottom: 1rem;">Enter admin password to access the panel</p>
+                <input type="password" class="form-input" id="loginPassword" placeholder="Enter Password" style="text-align: center; font-size: 1.2rem; letter-spacing: 0.2rem; margin-bottom: 1rem;">
+                <div style="display: flex; gap: 1rem;">
+                    <button class="btn-primary" onclick="adminLogin()">Login</button>
+                    <button class="btn-primary" onclick="closeLogin()" style="background: #555;">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Product Form Modal -->
+    <div id="productModal" class="modal hidden">
+        <div class="modal-content" style="max-width: 500px;">
+            <div class="modal-header">
+                <h2 class="modal-title" id="productModalTitle">Add New Product</h2>
+                <button class="close-btn" onclick="closeProductModal()">✖</button>
+            </div>
+            <div>
+                <input type="hidden" id="editProductId">
+                <input type="text" class="form-input" id="productName" placeholder="Product Name" style="margin-bottom: 1rem;">
+                <input type="text" class="form-input" id="productDesc" placeholder="Description" style="margin-bottom: 1rem;">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+                    <input type="number" class="form-input" id="productPrice" placeholder="Price (Rs.)">
+                    <input type="number" class="form-input" id="productStock" placeholder="Stock">
+                </div>
+                
+                <!-- Image Upload Section -->
+                <div style="margin-bottom: 1rem;">
+                    <label style="display: block; margin-bottom: 0.5rem; color: #00d4ff; font-weight: bold;">Product Image:</label>
+                    <div style="display: flex; gap: 0.5rem; margin-bottom: 0.5rem;">
+                        <button type="button" id="urlMethodBtn" onclick="setUploadMethod('url')" class="btn-primary" style="flex: 1; background: linear-gradient(135deg, #00d4ff, #0099cc); padding: 0.5rem;">🔗 URL</button>
+                        <button type="button" id="uploadMethodBtn" onclick="setUploadMethod('upload')" class="btn-primary" style="flex: 1; background: #555; padding: 0.5rem;">📤 Upload</button>
+                    </div>
+                    <input type="text" class="form-input" id="productImageUrl" placeholder="Paste image URL here" style="margin-bottom: 0.5rem;">
+                    <div style="position: relative;">
+                        <input type="file" id="productImageFile" accept="image/*" onchange="handleImageUpload(event)" style="display: none;">
+                        <label for="productImageFile" id="uploadLabel" style="display: none; width: 100%; padding: 2rem; background: rgba(0,212,255,0.1); border: 2px dashed rgba(0,212,255,0.5); border-radius: 0.5rem; text-align: center; cursor: pointer; color: #00d4ff; font-weight: bold;">
+                            📷 Click to Upload Image<br>
+                            <span style="font-size: 0.75rem; color: #666;">Max 5MB</span>
+                        </label>
+                    </div>
+                    <div id="imagePreview" style="margin-top: 0.5rem;"></div>
+                    <input type="hidden" id="productImage">
+                </div>
+                
+                <input type="text" class="form-input" id="productCategory" placeholder="Category" style="margin-bottom: 1rem;">
+                <div style="display: flex; gap: 1rem;">
+                    <button class="btn-primary" onclick="saveProduct()">Save Product</button>
+                    <button class="btn-primary" onclick="closeProductModal()" style="background: #555;">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <h2 class="footer-title">Mudasir's Cube Store</h2>
+        <p class="footer-info">📧 Email: hikmatzaib313@gmail.com</p>
+        <p class="footer-info">📱 WhatsApp: +92 334 7124766</p>
+        <p class="footer-info">📍 Location: Karachi, Pakistan</p>
+        <p style="color: #666; margin-top: 2rem;">© 2026 Mudasir's Cube Store. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // State
+        let products = [];
+        let cart = [];
+        let orders = [];
+        let isAdminLoggedIn = false;
+        let currentUploadMethod = 'url';
+        const ADMIN_PASSWORD = 'mudasir123';
+
+        // Load data from localStorage
+        function loadData() {
+            const savedProducts = localStorage.getItem('mudasir_products');
+            const savedOrders = localStorage.getItem('mudasir_orders');
+            
+            if (savedProducts) {
+                products = JSON.parse(savedProducts);
+            } else {
+                // Default products (first time only)
+                products = [
+                    { id: 1, name: '2x2 Pocket Cube', description: 'Perfect starter cube', price: 800, image: 'https://cdn.pixabay.com/photo/2017/09/27/14/45/cube-2792982_640.jpg', stock: 15, category: 'Speed Cubes' },
+                    { id: 2, name: '3x3 Speed Cube', description: 'Classic speedcubing cube', price: 1200, image: 'https://cdn.pixabay.com/photo/2014/06/11/17/00/rubiks-cube-367192_640.jpg', stock: 20, category: 'Speed Cubes' },
+                    { id: 3, name: '4x4 Master Cube', description: 'Advanced challenge', price: 1800, image: 'https://cdn.pixabay.com/photo/2018/03/15/15/37/rubiks-cube-3228149_640.jpg', stock: 10, category: 'Speed Cubes' },
+                    { id: 4, name: '5x5 Professor Cube', description: 'Expert level puzzle', price: 2500, image: 'https://cdn.pixabay.com/photo/2017/02/15/10/39/salad-2068217_640.jpg', stock: 8, category: 'Speed Cubes' }
+                ];
+                saveProducts();
+            }
+            
+            if (savedOrders) {
+                orders = JSON.parse(savedOrders);
+            }
+        }
+
+        // Save products to localStorage
+        function saveProducts() {
+            localStorage.setItem('mudasir_products', JSON.stringify(products));
+        }
+
+        // Save orders to localStorage
+        function saveOrders() {
+            localStorage.setItem('mudasir_orders', JSON.stringify(orders));
+        }
+
+        // Initialize - Load data first
+        loadData();
+        renderProducts();
+        updateCartUI();
+
+        // Show Notification
+        function showNotification(message, type = 'success') {
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.textContent = message;
+            document.getElementById('notification-container').appendChild(notification);
+            setTimeout(() => notification.remove(), 3000);
+        }
+
+        // Render Products
+        function renderProducts() {
+            const grid = document.getElementById('productsGrid');
+            grid.innerHTML = products.map(p => `
+                <div class="product-card">
+                    <div class="product-image">
+                        <div class="stock-badge">Stock: ${p.stock}</div>
+                        <img src="${p.image}" alt="${p.name}">
+                    </div>
+                    <div class="product-info">
+                        <span class="category-tag">${p.category}</span>
+                        <div class="product-name">${p.name}</div>
+                        <div class="product-desc">${p.description}</div>
+                        <div class="product-footer">
+                            <div class="product-price">Rs. ${p.price}</div>
+                            <button class="add-to-cart-btn" onclick="addToCart(${p.id})" ${p.stock === 0 ? 'disabled' : ''}>
+                                ${p.stock === 0 ? 'Out of Stock' : 'Add to Cart'}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Add to Cart
+        function addToCart(productId) {
+            const product = products.find(p => p.id === productId);
+            const existingItem = cart.find(item => item.id === productId);
+            
+            if (existingItem) {
+                existingItem.quantity++;
+            } else {
+                cart.push({ ...product, quantity: 1 });
+            }
+            
+            updateCartUI();
+            showNotification('Added to cart!');
+        }
+
+        // Update Cart UI
+        function updateCartUI() {
+            const cartCount = cart.reduce((sum, item) => sum + item.quantity, 0);
+            document.getElementById('cartCount').textContent = cart.length;
+            document.getElementById('cartBadge').textContent = cartCount;
+            document.getElementById('cartBtn').classList.toggle('hidden', cart.length === 0);
+        }
+
+        // Open Cart
+        document.getElementById('cartBtn').addEventListener('click', () => {
+            const cartItems = document.getElementById('cartItems');
+            const checkoutSection = document.getElementById('checkoutSection');
+            
+            if (cart.length === 0) {
+                cartItems.innerHTML = '<div style="text-align: center; padding: 3rem 0; color: #666;"><div style="font-size: 4rem; margin-bottom: 1rem;">🛒</div><p>Your cart is empty</p></div>';
+                checkoutSection.classList.add('hidden');
+            } else {
+                cartItems.innerHTML = cart.map(item => `
+                    <div class="cart-item">
+                        <img src="${item.image}" alt="${item.name}">
+                        <div class="cart-item-info">
+                            <div style="font-weight: bold; font-size: 1.125rem;">${item.name}</div>
+                            <div style="color: #ff00ea; font-weight: bold;">Rs. ${item.price}</div>
+                        </div>
+                        <div class="quantity-controls">
+                            <button class="qty-btn" onclick="updateQuantity(${item.id}, ${item.quantity - 1})">−</button>
+                            <span style="font-weight: bold; width: 2rem; text-align: center;">${item.quantity}</span>
+                            <button class="qty-btn plus" onclick="updateQuantity(${item.id}, ${item.quantity + 1})">+</button>
+                        </div>
+                        <button style="background: none; border: none; color: #ef4444; cursor: pointer; font-size: 1.5rem;" onclick="removeFromCart(${item.id})">🗑️</button>
+                    </div>
+                `).join('');
+                
+                const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+                document.getElementById('cartTotal').textContent = total;
+                checkoutSection.classList.remove('hidden');
+            }
+            
+            document.getElementById('cartModal').classList.remove('hidden');
+        });
+
+        function closeCart() {
+            document.getElementById('cartModal').classList.add('hidden');
+        }
+
+        function updateQuantity(productId, newQty) {
+            if (newQty <= 0) {
+                removeFromCart(productId);
+            } else {
+                const item = cart.find(i => i.id === productId);
+                if (item) item.quantity = newQty;
+                updateCartUI();
+                document.getElementById('cartBtn').click(); // Refresh cart display
+            }
+        }
+
+        function removeFromCart(productId) {
+            cart = cart.filter(item => item.id !== productId);
+            updateCartUI();
+            document.getElementById('cartBtn').click();
+        }
+
+        // Place Order
+        function placeOrder() {
+            const name = document.getElementById('customerName').value;
+            const phone = document.getElementById('customerPhone').value;
+            const address = document.getElementById('customerAddress').value;
+            const city = document.getElementById('customerCity').value;
+            
+            if (!name || !phone || !address || !city) {
+                showNotification('Please fill all fields!', 'error');
+                return;
+            }
+            
+            const order = {
+                id: Date.now(),
+                name, phone, address, city,
+                items: cart,
+                total: cart.reduce((sum, item) => sum + (item.price * item.quantity), 0),
+                status: 'Pending',
+                date: new Date().toLocaleDateString()
+            };
+            
+            orders.push(order);
+            saveOrders(); // Save to localStorage
+            cart = [];
+            updateCartUI();
+            closeCart();
+            
+            document.getElementById('customerName').value = '';
+            document.getElementById('customerPhone').value = '';
+            document.getElementById('customerAddress').value = '';
+            document.getElementById('customerCity').value = '';
+            
+            showNotification('Order placed successfully!');
+        }
+
+        // View Switching
+        document.getElementById('customerViewBtn').addEventListener('click', () => {
+            document.getElementById('customerView').classList.remove('hidden');
+            document.getElementById('adminView').classList.add('hidden');
+            document.getElementById('customerViewBtn').classList.add('active');
+            document.getElementById('adminViewBtn').classList.remove('active');
+        });
+
+        document.getElementById('adminViewBtn').addEventListener('click', () => {
+            if (!isAdminLoggedIn) {
+                document.getElementById('loginModal').classList.remove('hidden');
+            } else {
+                switchToAdminView();
+            }
+        });
+
+        function switchToAdminView() {
+            document.getElementById('customerView').classList.add('hidden');
+            document.getElementById('adminView').classList.remove('hidden');
+            document.getElementById('customerViewBtn').classList.remove('active');
+            document.getElementById('adminViewBtn').classList.add('active');
+            renderAdminDashboard();
+        }
+
+        // Admin Login
+        function adminLogin() {
+            const password = document.getElementById('loginPassword').value;
+            if (password === ADMIN_PASSWORD) {
+                isAdminLoggedIn = true;
+                document.getElementById('loginModal').classList.add('hidden');
+                document.getElementById('loginPassword').value = '';
+                document.getElementById('logoutBtn').classList.remove('hidden');
+                switchToAdminView();
+                showNotification('Admin login successful!');
+            } else {
+                showNotification('Incorrect password!', 'error');
+                document.getElementById('loginPassword').value = '';
+            }
+        }
+
+        function closeLogin() {
+            document.getElementById('loginModal').classList.add('hidden');
+            document.getElementById('loginPassword').value = '';
+        }
+
+        document.getElementById('loginPassword').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') adminLogin();
+        });
+
+        // Logout
+        document.getElementById('logoutBtn').addEventListener('click', () => {
+            isAdminLoggedIn = false;
+            document.getElementById('logoutBtn').classList.add('hidden');
+            document.getElementById('customerViewBtn').click();
+            showNotification('Logged out successfully!');
+        });
+
+        // Admin Dashboard
+        function renderAdminDashboard() {
+            document.getElementById('totalProducts').textContent = products.length;
+            document.getElementById('totalOrders').textContent = orders.length;
+            document.getElementById('totalRevenue').textContent = orders.reduce((sum, o) => sum + o.total, 0);
+            document.getElementById('totalCustomers').textContent = new Set(orders.map(o => o.phone)).size;
+            
+            renderProductsList();
+            renderOrdersList();
+        }
+
+        function renderProductsList() {
+            const list = document.getElementById('productsList');
+            list.innerHTML = products.map(p => `
+                <div class="product-list-item">
+                    <img src="${p.image}" style="width: 80px; height: 80px; object-fit: cover; border-radius: 0.5rem;">
+                    <div style="flex: 1;">
+                        <div style="font-weight: bold; font-size: 1.125rem;">${p.name}</div>
+                        <div style="color: #999; font-size: 0.875rem;">${p.description}</div>
+                        <div style="display: flex; gap: 1rem; margin-top: 0.5rem;">
+                            <span style="color: #ff00ea; font-weight: bold;">Rs. ${p.price}</span>
+                            <span style="color: #00d4ff;">Stock: ${p.stock}</span>
+                        </div>
+                    </div>
+                    <div class="action-btns">
+                        <button class="btn-edit" onclick="editProduct(${p.id})">✏️</button>
+                        <button class="btn-delete" onclick="deleteProduct(${p.id})">🗑️</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function renderOrdersList() {
+            const list = document.getElementById('ordersList');
+            if (orders.length === 0) {
+                list.innerHTML = '<div style="text-align: center; padding: 3rem 0; color: #666;"><div style="font-size: 4rem; margin-bottom: 1rem;">📋</div><p>No orders yet</p></div>';
+            } else {
+                list.innerHTML = orders.map(o => `
+                    <div style="padding: 1.5rem; background: rgba(255,255,255,0.05); border-radius: 0.75rem; border: 1px solid #333; margin-bottom: 1rem;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 1rem; flex-wrap: wrap; gap: 1rem;">
+                            <div style="flex: 1;">
+                                <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                                    <div style="font-size: 1.5rem; font-weight: bold; color: #00d4ff;">${o.name}</div>
+                                    <span style="padding: 0.25rem 0.75rem; border-radius: 1rem; font-size: 0.75rem; font-weight: bold; background: rgba(234,179,8,0.2); color: #facc15;">
+                                        ${o.status}
+                                    </span>
+                                </div>
+                                <div style="font-size: 0.875rem; color: #999; line-height: 1.8;">
+                                    <p><strong style="color: #00d4ff;">📱 Phone:</strong> ${o.phone}</p>
+                                    <p><strong style="color: #00d4ff;">📍 Address:</strong> ${o.address}</p>
+                                    <p><strong style="color: #00d4ff;">🏙️ City:</strong> ${o.city}</p>
+                                    <p><strong style="color: #00d4ff;">📅 Date:</strong> ${o.date}</p>
+                                </div>
+                            </div>
+                            <div style="text-align: right;">
+                                <div style="font-size: 2rem; font-weight: bold; background: linear-gradient(135deg, #ff00ea, #00d4ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 0.75rem;">
+                                    Rs. ${o.total}
+                                </div>
+                                <select onchange="updateOrderStatus(${o.id}, this.value)" style="padding: 0.5rem 1rem; border-radius: 0.5rem; font-weight: bold; cursor: pointer; border: 2px solid; background: rgba(234,179,8,0.2); color: #facc15; border-color: rgba(234,179,8,0.5);">
+                                    <option value="Pending" ${o.status === 'Pending' ? 'selected' : ''}>⏳ Pending</option>
+                                    <option value="Processing" ${o.status === 'Processing' ? 'selected' : ''}>📦 Processing</option>
+                                    <option value="Delivered" ${o.status === 'Delivered' ? 'selected' : ''}>✅ Delivered</option>
+                                    <option value="Cancelled" ${o.status === 'Cancelled' ? 'selected' : ''}>❌ Cancelled</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div style="border-top: 1px solid #333; padding-top: 1rem; margin-top: 1rem;">
+                            <p style="font-size: 0.875rem; color: #999; font-weight: bold; margin-bottom: 0.5rem;">📦 Order Items:</p>
+                            ${o.items.map(item => `
+                                <div style="display: flex; justify-between; font-size: 0.875rem; padding: 0.5rem 0; border-bottom: 1px solid rgba(255,255,255,0.05);">
+                                    <span style="color: #ccc;">${item.name} × ${item.quantity}</span>
+                                    <span style="color: #00d4ff; font-weight: bold;">Rs. ${item.price * item.quantity}</span>
+                                </div>
+                            `).join('')}
+                            <div style="display: flex; justify-content: space-between; font-weight: bold; font-size: 1rem; margin-top: 1rem; padding-top: 1rem; border-top: 2px solid #333;">
+                                <span style="color: #fff;">Total Amount:</span>
+                                <span style="color: #ff00ea; font-size: 1.25rem;">Rs. ${o.total}</span>
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+            }
+        }
+
+        function updateOrderStatus(orderId, newStatus) {
+            const order = orders.find(o => o.id === orderId);
+            if (order) {
+                order.status = newStatus;
+                saveOrders(); // Save to localStorage
+                renderOrdersList();
+                showNotification(`Order status updated to ${newStatus}`);
+            }
+        }
+
+        // Product Management
+        function setUploadMethod(method) {
+            currentUploadMethod = method;
+            const urlBtn = document.getElementById('urlMethodBtn');
+            const uploadBtn = document.getElementById('uploadMethodBtn');
+            const urlInput = document.getElementById('productImageUrl');
+            const uploadLabel = document.getElementById('uploadLabel');
+            
+            if (method === 'url') {
+                urlBtn.style.background = 'linear-gradient(135deg, #00d4ff, #0099cc)';
+                uploadBtn.style.background = '#555';
+                urlInput.style.display = 'block';
+                uploadLabel.style.display = 'none';
+            } else {
+                urlBtn.style.background = '#555';
+                uploadBtn.style.background = 'linear-gradient(135deg, #00d4ff, #0099cc)';
+                urlInput.style.display = 'none';
+                uploadLabel.style.display = 'block';
+            }
+        }
+
+        function handleImageUpload(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            
+            if (file.size > 5000000) {
+                showNotification('Image size should be less than 5MB!', 'error');
+                return;
+            }
+            
+            const reader = new FileReader();
+            reader.onloadend = function() {
+                const base64String = reader.result;
+                document.getElementById('productImage').value = base64String;
+                
+                // Show preview
+                const preview = document.getElementById('imagePreview');
+                preview.innerHTML = `
+                    <div style="position: relative;">
+                        <img src="${base64String}" style="width: 100%; height: 200px; object-fit: cover; border-radius: 0.5rem; border: 2px solid #00d4ff;">
+                        <button onclick="clearImagePreview()" style="position: absolute; top: 0.5rem; right: 0.5rem; background: #ef4444; color: white; border: none; padding: 0.5rem; border-radius: 50%; cursor: pointer; width: 2rem; height: 2rem; display: flex; align-items: center; justify-content: center; font-weight: bold;">✖</button>
+                    </div>
+                `;
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function clearImagePreview() {
+            document.getElementById('imagePreview').innerHTML = '';
+            document.getElementById('productImage').value = '';
+            document.getElementById('productImageFile').value = '';
+        }
+
+        document.getElementById('addProductBtn').addEventListener('click', () => {
+            document.getElementById('productModalTitle').textContent = 'Add New Product';
+            document.getElementById('editProductId').value = '';
+            document.getElementById('productName').value = '';
+            document.getElementById('productDesc').value = '';
+            document.getElementById('productPrice').value = '';
+            document.getElementById('productStock').value = '';
+            document.getElementById('productImage').value = '';
+            document.getElementById('productImageUrl').value = '';
+            document.getElementById('productCategory').value = '';
+            document.getElementById('imagePreview').innerHTML = '';
+            document.getElementById('productImageFile').value = '';
+            setUploadMethod('url');
+            document.getElementById('productModal').classList.remove('hidden');
+        });
+
+        function editProduct(productId) {
+            const product = products.find(p => p.id === productId);
+            if (product) {
+                document.getElementById('productModalTitle').textContent = 'Edit Product';
+                document.getElementById('editProductId').value = product.id;
+                document.getElementById('productName').value = product.name;
+                document.getElementById('productDesc').value = product.description;
+                document.getElementById('productPrice').value = product.price;
+                document.getElementById('productStock').value = product.stock;
+                document.getElementById('productImage').value = product.image;
+                document.getElementById('productImageUrl').value = product.image;
+                document.getElementById('productCategory').value = product.category;
+                
+                // Show preview if image exists
+                if (product.image) {
+                    document.getElementById('imagePreview').innerHTML = `
+                        <div style="position: relative;">
+                            <img src="${product.image}" style="width: 100%; height: 200px; object-fit: cover; border-radius: 0.5rem; border: 2px solid #00d4ff;">
+                            <button onclick="clearImagePreview()" style="position: absolute; top: 0.5rem; right: 0.5rem; background: #ef4444; color: white; border: none; padding: 0.5rem; border-radius: 50%; cursor: pointer; width: 2rem; height: 2rem; display: flex; align-items: center; justify-content: center; font-weight: bold;">✖</button>
+                        </div>
+                    `;
+                }
+                
+                setUploadMethod('url');
+                document.getElementById('productModal').classList.remove('hidden');
+            }
+        }
+
+        function deleteProduct(productId) {
+            if (confirm('Are you sure you want to delete this product?')) {
+                products = products.filter(p => p.id !== productId);
+                saveProducts(); // Save to localStorage
+                renderProducts();
+                renderProductsList();
+                showNotification('Product deleted!', 'error');
+            }
+        }
+
+        function saveProduct() {
+            const id = document.getElementById('editProductId').value;
+            const name = document.getElementById('productName').value;
+            const description = document.getElementById('productDesc').value;
+            const price = Number(document.getElementById('productPrice').value);
+            const stock = Number(document.getElementById('productStock').value);
+            const category = document.getElementById('productCategory').value;
+            
+            // Get image from either URL or uploaded file
+            let image = document.getElementById('productImage').value;
+            if (currentUploadMethod === 'url') {
+                image = document.getElementById('productImageUrl').value;
+            }
+            
+            if (!name || !price || !stock || !image) {
+                showNotification('Please fill all required fields!', 'error');
+                return;
+            }
+            
+            if (id) {
+                // Edit existing
+                const product = products.find(p => p.id == id);
+                if (product) {
+                    product.name = name;
+                    product.description = description;
+                    product.price = price;
+                    product.stock = stock;
+                    product.image = image;
+                    product.category = category;
+                    showNotification('Product updated successfully!');
+                }
+            } else {
+                // Add new
+                products.push({
+                    id: Date.now(),
+                    name, description, price, stock, image, category
+                });
+                showNotification('Product added successfully!');
+            }
+            
+            saveProducts(); // Save to localStorage
+            closeProductModal();
+            renderProducts();
+            renderProductsList();
+        }
+
+        function closeProductModal() {
+            document.getElementById('productModal').classList.add('hidden');
+        }
+    </script>
+</body>
+</html>
